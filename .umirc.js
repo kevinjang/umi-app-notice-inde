@@ -1,7 +1,16 @@
 
 // ref: https://umijs.org/config/
 export default {
-  treeShaking: true,
+  // treeShaking: true,
+  antd: {
+    dark: false,
+    compact: true
+  },
+  dva: {
+    hmr: true
+  },
+  dynamicImport: false,
+  title: 'umi-app-notice-inde',
   routes: [
     {
       path: '/',
@@ -10,25 +19,5 @@ export default {
         { path: '/', component: '../pages/index' }
       ]
     }
-  ],
-  plugins: [
-    // ref: https://umijs.org/plugin/umi-plugin-react.html
-    ['umi-plugin-react', {
-      antd: true,
-      dva: true,
-      dynamicImport: false,
-      title: 'umi-app-notice-inde',
-      dll: false,
-      
-      routes: {
-        exclude: [
-          /models\//,
-          /services\//,
-          /model\.(t|j)sx?$/,
-          /service\.(t|j)sx?$/,
-          /components\//,
-        ],
-      },
-    }],
   ],
 }

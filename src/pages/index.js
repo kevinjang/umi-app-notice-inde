@@ -1,6 +1,6 @@
 import styles from './index.css';
 import { Dropdown, Button, Tabs, Menu } from 'antd'
-import { ArrowDownOutline, DownOutlined } from '@ant-design/icons'
+import { BellOutlined } from '@ant-design/icons'
 
 import GlobalHeaderDropdown from '../components/GlobalHeader/NoticeIconView'
 
@@ -34,7 +34,8 @@ export default function () {
       </Dropdown> */}
       <GlobalHeaderDropdown overlay={menu} trigger={['click']} >
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          Click me
+          {/* Click me  */}
+          {<BellOutlined />}
         </a>
       </GlobalHeaderDropdown>
     </div>
