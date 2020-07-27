@@ -103,3 +103,9 @@ dist
 # TernJS port file
 .tern-port
 src/pages/.umi
+src/pages/.umi/dva.js
+src/pages/.umi/history.js
+src/pages/.umi/polyfills.js
+src/pages/.umi/router.js
+src/pages/.umi/TitleWrapper.jsx
+src/pages/.umi/umi.js
