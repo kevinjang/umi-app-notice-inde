@@ -148,3 +148,9 @@ src/.umi/plugin-model/runtime.tsx
 src/.umi/plugin-model/useModel.tsx
 src/.umi/plugin-request/request.ts
 src/.umi/umi.ts
+src/pages/.umi/dva.js
+src/pages/.umi/history.js
+src/pages/.umi/polyfills.js
+src/pages/.umi/router.js
+src/pages/.umi/TitleWrapper.jsx
+src/pages/.umi/umi.js

@@ -1,6 +1,8 @@
 import { Spin, Tabs } from 'antd'
 import NoticeList from './NoticeList'
 import React from 'react'
+import HeaderDropdown from '../HeaderDropdown'
+import {BellOutlined} from '@ant-design/icons'
 
 const { TabPane } = Tabs;
 const NoticeIcon = (props) => {
@@ -16,14 +18,16 @@ const NoticeIcon = (props) => {
             )
         })
 
-        return panes;
+        return <Spin delay={300} spinning={loading}>
+        <Tabs>
+            {panes}
+        </Tabs>
+    </Spin>;
     }
 
-    return <Spin delay={300} spinning={loading}>
-        <Tabs>
-            {getNotificationBox()}
-        </Tabs>
-    </Spin>
+    return <HeaderDropdown trigger={['click']} overlay={getNotificationBox()}>
+        {<BellOutlined ></BellOutlined>}
+    </HeaderDropdown>
 }
 
 NoticeIcon.Tab = NoticeList;
