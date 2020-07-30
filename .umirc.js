@@ -7,6 +7,7 @@ export default {
     compact: true
   },
   dva: {
+    immer: true,
     hmr: true
   },
   dynamicImport: {
