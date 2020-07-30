@@ -2,7 +2,10 @@ import HeaderDropdown from '../HeaderDropdown/'
 import NoticeIcon from '../NoticeIcon'
 import React, { useEffect } from 'react'
 
+
 import { connect } from 'umi'
+import { Tag } from 'antd';
+import groupBy from 'lodash/groupBy'
 // console.log('connect:', connect)
 
 class GlobalHeaderDropdown extends React.Component {
@@ -19,15 +22,79 @@ class GlobalHeaderDropdown extends React.Component {
     }
   }
 
+  getNoticeData = () => {
+    const { notices = [] } = this.props;
+    if (!notices || notices.length === 0 || !Array.isArray(notices)) {
+      return {};
+    }
+
+    const newNotices = notices.map(notice => {
+      const newNotice = { ...notice };
+
+      if (newNotice.datetime) {
+        newNotice.datetime = moment(notice.datetime).fromNow();
+      }
+
+      if (newNotice.id) {
+        newNotice.key = newNotice.id;
+      }
+
+      if (newNotice.extra && newNotice.status) {
+        const color = {
+          todo: '',
+          processing: 'blue',
+          urgent: 'red',
+          doing: 'gold'
+        }[newNotice.status];
+        newNotice.extra = (
+          <Tag color={color} style={{
+            marginRight: 0
+          }}>
+            {newNotice.extra}
+          </Tag>
+        );
+      }
+
+      return newNotice;
+    });
+
+    return groupBy(newNotices, 'type');
+  }
+
+  getUnreadData = noticeData => {
+    const unreadMsg = {};
+    Object.keys(noticeData).forEach(key => {
+      const value = noticeData[key];
+
+      if (!unreadMsg[key]) {
+        unreadMsg[key] = 0;
+      }
+
+      if (Array.isArray(value)) {
+        unreadMsg[key] = value.filter(item => !item.read).length;
+      }
+    });
+
+    return unreadMsg;
+  }
+
   render() {
     const { fetchingNotices } = this.props;
-    return <HeaderDropdown trigger={['click']} {...this.props} >
-      <NoticeIcon loading={fetchingNotices}>
-        <NoticeIcon.Tab title="你猜" key={"noticeicon.tab1"}>
-          Tab1
-        </NoticeIcon.Tab>
-      </NoticeIcon>
-    </HeaderDropdown>
+    const noticeData = this.getNoticeData();
+    const unreadMsg = this.getUnreadData(noticeData);
+    return (
+      <NoticeIcon 
+        
+        loading={fetchingNotices}>
+        <NoticeIcon.Tab 
+          tabKey="notification" 
+          count={unreadMsg.notification}
+          list={noticeData.notification}
+          title="通知"
+          emptyText="你已查看所有通知"
+          showViewMore
+        />
+      </NoticeIcon>)
   }
 }
 
