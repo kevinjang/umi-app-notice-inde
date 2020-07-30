@@ -1,11 +1,10 @@
 import HeaderDropdown from '../HeaderDropdown/'
-import { Menu } from 'antd'
 import NoticeIcon from '../NoticeIcon'
 
-import { connect } from 'react-redux'
-
+import { connect } from 'umi'
+// console.log('connect:', connect)
 const GlobalHeaderDropdown = ({ fetchingNotices, ...restProps }) => {
-  console.log('GlobalHeaderDropdown fetchingNotices:', fetchingNotices)
+  // console.log('GlobalHeaderDropdown fetchingNotices:', fetchingNotices)
   return <HeaderDropdown trigger={['click']} {...restProps} >
     <NoticeIcon>
       <NoticeIcon.Tab key={"noticeicon.tab1"}>
