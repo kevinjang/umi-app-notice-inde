@@ -2,7 +2,7 @@ import { Spin, Tabs } from 'antd'
 import NoticeList from './NoticeList'
 import React from 'react'
 import HeaderDropdown from '../HeaderDropdown'
-import {BellOutlined} from '@ant-design/icons'
+import { BellOutlined } from '@ant-design/icons'
 
 const { TabPane } = Tabs;
 const NoticeIcon = (props) => {
@@ -13,16 +13,17 @@ const NoticeIcon = (props) => {
         React.Children.forEach(children, child => {
             panes.push(
                 <TabPane key={"tabpane1"} >
-                    <NoticeList {...child.props}></NoticeList>
+                    <NoticeList {...child.props}>极大四六级</NoticeList>
                 </TabPane>
             )
         })
 
+        console.log('noticeicon loading:', loading);
         return <Spin delay={300} spinning={loading}>
-        <Tabs>
-            {panes}
-        </Tabs>
-    </Spin>;
+            <Tabs>
+                {panes}
+            </Tabs>
+        </Spin>;
     }
 
     return <HeaderDropdown trigger={['click']} overlay={getNotificationBox()}>

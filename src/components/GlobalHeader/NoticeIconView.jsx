@@ -23,7 +23,7 @@ class GlobalHeaderDropdown extends React.Component {
     const { fetchingNotices } = this.props;
     return <HeaderDropdown trigger={['click']} {...this.props} >
       <NoticeIcon loading={fetchingNotices}>
-        <NoticeIcon.Tab key={"noticeicon.tab1"}>
+        <NoticeIcon.Tab title="你猜" key={"noticeicon.tab1"}>
           Tab1
         </NoticeIcon.Tab>
       </NoticeIcon>
