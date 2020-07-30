@@ -5,7 +5,7 @@ import React from 'react'
 const { TabPane } = Tabs;
 const NoticeIcon = (props) => {
 
-    const { children } = props;
+    const { children, loading } = props;
     const getNotificationBox = () => {
         const panes = [];
         React.Children.forEach(children, child => {
@@ -19,7 +19,7 @@ const NoticeIcon = (props) => {
         return panes;
     }
 
-    return <Spin delay={300}>
+    return <Spin delay={300} spinning={loading}>
         <Tabs>
             {getNotificationBox()}
         </Tabs>

@@ -1,36 +1,40 @@
 import HeaderDropdown from '../HeaderDropdown/'
-import {Menu} from 'antd'
 import NoticeIcon from '../NoticeIcon'
+import React, { useEffect } from 'react'
 
-const GlobalHeaderDropdown = ({...restProps})=>{
-    
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-          1st menu item
-      </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-          2nd menu item
-      </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-          3rd menu item
-      </a>
-      </Menu.Item>
-      <Menu.Item danger>a danger item</Menu.Item>
-    </Menu>
-  )
+import { connect } from 'umi'
+// console.log('connect:', connect)
 
-    return <HeaderDropdown trigger={['click']} {...restProps} >
-        <NoticeIcon>
-            <NoticeIcon.Tab key={"noticeicon.tab1"}>
-                Tab1
-            </NoticeIcon.Tab>
-        </NoticeIcon>
+class GlobalHeaderDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'global/fetchNotices'
+      })
+    }
+  }
+
+  render() {
+    const { fetchingNotices } = this.props;
+    return <HeaderDropdown trigger={['click']} {...this.props} >
+      <NoticeIcon loading={fetchingNotices}>
+        <NoticeIcon.Tab key={"noticeicon.tab1"}>
+          Tab1
+        </NoticeIcon.Tab>
+      </NoticeIcon>
     </HeaderDropdown>
+  }
 }
-export default GlobalHeaderDropdown
+
+export default connect(({ global, loading }) => {
+  console.log('loading:', loading);
+  console.log('niv global:', global)
+  return {
+    fetchingNotices: loading.effects['global/fetchNotices']
+  }
+})(GlobalHeaderDropdown)

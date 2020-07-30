@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
+    "@ant-design/pro-layout": "^6.3.0",
     "@umijs/preset-react": "^1.5.19",
     "antd": "^4.4.3",
     "dva": "^2.6.0-beta.20",

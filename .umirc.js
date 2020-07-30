@@ -7,9 +7,12 @@ export default {
     compact: true
   },
   dva: {
+    immer: true,
     hmr: true
   },
-  dynamicImport: false,
+  dynamicImport: {
+    loading: '@/components/PageLoading/index'
+  },
   title: 'umi-app-notice-inde',
   routes: [
     {
