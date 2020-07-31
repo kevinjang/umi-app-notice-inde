@@ -33,7 +33,7 @@ const NoticeIcon = (props) => {
             const tabTitle = msgCount > 0? `${title} (${msgCount})`: title;
             panes.push(
                 <TabPane tab={tabTitle} key={tabKey} >
-                    <NoticeList {...child.props}>极大四六级</NoticeList>
+                    <NoticeList data={list} {...child.props}></NoticeList>
                 </TabPane>
             )
         })

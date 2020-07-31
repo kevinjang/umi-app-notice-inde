@@ -6,6 +6,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'umi'
 import { Tag } from 'antd';
 import groupBy from 'lodash/groupBy'
+import moment from 'moment'
 // console.log('connect:', connect)
 
 class GlobalHeaderDropdown extends React.Component {
@@ -82,16 +83,26 @@ class GlobalHeaderDropdown extends React.Component {
     const { fetchingNotices } = this.props;
     const noticeData = this.getNoticeData();
     const unreadMsg = this.getUnreadData(noticeData);
+
+    console.log('noticedata:', noticeData.notification)
     return (
-      <NoticeIcon 
-        
+      <NoticeIcon
+
         loading={fetchingNotices}>
-        <NoticeIcon.Tab 
-          tabKey="notification" 
+        <NoticeIcon.Tab
+          tabKey="notification"
           count={unreadMsg.notification}
           list={noticeData.notification}
           title="通知"
           emptyText="你已查看所有通知"
+          showViewMore
+        />
+        <NoticeIcon.Tab
+          tabKey="message"
+          count={unreadMsg.message}
+          list={noticeData.message}
+          title="消息"
+          emptyText="没有新消息"
           showViewMore
         />
       </NoticeIcon>)
@@ -102,6 +113,7 @@ export default connect(({ global, loading }) => {
   console.log('loading:', loading);
   console.log('niv global:', global)
   return {
-    fetchingNotices: loading.effects['global/fetchNotices']
+    fetchingNotices: loading.effects['global/fetchNotices'],
+    notices: global.notices
   }
 })(GlobalHeaderDropdown)
