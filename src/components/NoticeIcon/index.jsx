@@ -33,12 +33,12 @@ const NoticeIcon = (props) => {
             const tabTitle = msgCount > 0? `${title} (${msgCount})`: title;
             panes.push(
                 <TabPane tab={tabTitle} key={tabKey} >
-                    <NoticeList data={list} {...child.props}></NoticeList>
+                    <NoticeList clearText={clearText} viewMoreText={viewMoreText} data={list} {...child.props}></NoticeList>
                 </TabPane>
             )
         })
 
-        console.log('noticeicon loading:', loading);
+        // console.log('noticeicon loading:', loading);
         return <Spin delay={300} spinning={loading}>
             <Tabs>
                 {panes}
@@ -46,7 +46,7 @@ const NoticeIcon = (props) => {
         </Spin>;
     }
 
-    const {count} = props;
+    const {count = 11} = props;
 
     const trigger = (
         <span>

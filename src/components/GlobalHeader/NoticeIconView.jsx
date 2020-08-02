@@ -87,7 +87,8 @@ class GlobalHeaderDropdown extends React.Component {
     console.log('noticedata:', noticeData.notification)
     return (
       <NoticeIcon
-
+        clearText="清空"
+        viewMoreText="查看更多"
         loading={fetchingNotices}>
         <NoticeIcon.Tab
           tabKey="notification"
@@ -103,6 +104,14 @@ class GlobalHeaderDropdown extends React.Component {
           list={noticeData.message}
           title="消息"
           emptyText="没有新消息"
+          showViewMore
+        />
+        <NoticeIcon.Tab
+          tabKey="event"
+          count={unreadMsg.event}
+          list={noticeData.event}
+          title="事件"
+          emptyText="没有新事件"
           showViewMore
         />
       </NoticeIcon>)
